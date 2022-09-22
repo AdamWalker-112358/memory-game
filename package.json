@@ -1,0 +1,22 @@
+{
+  "name": "memory-game-start",
+  "version": "1.0.0",
+  "description": "",
+  "author": {
+    "name": "Yariv Gilad",
+    "email": "yariv.gilad@gmail.com",
+    "url": "https://yarivgilad.com/"
+  },
+  "main": "index.html",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel --open",
+    "build": "parcel build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel": "^2.7.0"
+  },
+  "keywords": []
+}
