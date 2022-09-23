@@ -7,7 +7,6 @@
     "email": "yariv.gilad@gmail.com",
     "url": "https://yarivgilad.com/"
   },
-  "main": "index.html",
   "source": "index.html",
   "scripts": {
     "start": "parcel --open",

@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Memory Game</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700"
-    />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorize</title>
     <link rel="stylesheet" href="src/sass/styles.scss" />
+    <script src="src/index.js" defer></script>
   </head>
 
   <body>
-    <div class="main">
-      <header class="header">
-        <h2 class="title">Memory Game!!!</h2>
-      </header>
-      <button>click me</button>
-      <div class="cards-box"></div>
-      <div class="picker-box"></div>
-    </div>
+    <header class="header">
+      <div class="header__logo">
+        <img class="logo__icon" src="./src/media/icon.png" alt="Icon" >
+        <img class="logo__text" src="./src/media/logo.svg" alt="Logo" >
+      </div>
+      <button class="header__button"> New Game </button>
+    </header>
 
-    <script src="src/index.js"></script>
+    <main class="main">
+      <div class="main__timer">05:00</div>
+      <div class="scoreboard">WINS: 0</div>
+      <div class="main__game">
+        <div class="game__display" ></div>
+        <div class="game__pallette"></div>
+      </div>
+    </main>
+
+    <footer></footer>
   </body>
 </html>
