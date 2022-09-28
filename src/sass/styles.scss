@@ -17,6 +17,7 @@ $white: #E6E6E6;
 }
 
 body {
+  min-width: 500px;
   background-color: $grey;
 }
 
@@ -37,7 +38,12 @@ header,footer {
   gap: 20px;
 }
 
-.header__button {
+.header__buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons__new, .buttons__reset {
   padding: 10px 20px;
   border-radius: 5px;
   border: $white 1px solid;
@@ -63,6 +69,7 @@ main {
 
 .main__game {
   width: 40%;
+  min-width: 400px;
   display:flex;
   flex-direction: column;
   gap: 20px;
@@ -119,3 +126,68 @@ main {
   border: 1px dashed steelblue;
 }
 
+.modal {
+  width: 600px;
+  height: 300px;
+  border: 1px solid #cecece7c;
+  border-radius: 5px;
+  box-shadow: 1px 4px 15px 5px #615e5e;
+  font-size: 4rem;
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 300px);
+
+}
+
+.modal__content {
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  display: grid;
+
+
+}
+
+.modal::backdrop {
+  position: absolute;
+  inset:0;
+  background-color:rgba(255, 255, 255, 0.438);
+  filter:blur(5px);
+}
+
+.modal__title {
+  font-size: 36px;
+}
+
+.modal__body{
+  font-size: 16px;
+}
+
+.modal__buttons {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.modal__button-close, .modal__button-new {
+  padding: 10px 30px;
+  align-self: end;
+  box-shadow: 1px 1px 5px 1px #a6a6a696;
+
+}
+
+.modal__button-new {
+  border: 2px solid $grey;
+  border-radius: 5px;
+  background-color: $grey;
+  color: $white;
+}
+
+.modal__button-close {
+  color: $grey;
+  border-radius: 5px;
+  border: 2px solid buttonface;
+}
+.blur {
+  filter: blur(10px);
+}

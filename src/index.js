@@ -19,10 +19,15 @@ const colors = [
 
 const pallette = document.querySelector(".game__pallette");
 const display = document.querySelector(".game__display");
-const button = document.querySelector(".header__button");
+const newButton = document.querySelector(".buttons__new");
+const resetButton = document.querySelector('.buttons__reset')
 const timer = document.querySelector('.main__timer');
 const scoreboard = document.querySelector('.scoreboard');
 const modal = document.querySelector('.modal');
+const modalNewButton = document.querySelector('.modal__button-new');
+const modalCloseButton = document.querySelector('.modal__button-close');
+const modalTitle = document.querySelector('.modal__title');
+const modalBody = document.querySelector('.modal__body');
 
 let colorTarget = [];
 let colorGuess = [];
@@ -81,17 +86,47 @@ function resetScore() {
 
 function renderModal() {
   if (gameState == 'win') {
-    setTimeout(x => { if (confirm('WINNER')) resetGame() }, 0)
+    setTimeout(x => { displayModal("WINNER! 😀") }, 0)
     incrementScore();
     
     
   } else if (gameState == 'lose') {
-    setTimeout(x => { if (confirm('LOSER')) resetGame() }, 0)
+    setTimeout(x => { displayModal('LOOSER 😕') }, 0)
+    // displayModal('LOSER');
     resetScore();
   }
 }
 
-function resetGame() {
+function displayModal(text) {
+  modalTitle.textContent = text
+  modalBody.innerHTML =
+`<strong>Consecutive wins: </strong> ${score}.</br> 
+Press enter to keep playing or cancel to reset the game`
+  modal.showModal();
+  document.body.classList.add('blur');
+  modalNewButton.addEventListener('click', event => {
+    hideModal();
+    resetGame();
+    return true;
+  })
+
+  modalCloseButton.addEventListener('click', event => {
+    hideModal();
+    endGame();
+    return true;
+  })
+
+}
+
+function hideModal() {
+  modal.close();
+  document.body.classList.remove('blur');
+}
+
+function resetGame(event) {
+  console.log({ colorGuess });
+  console.log({ colorTarget });
+  console.log({ event });
   resetTimer();
   colorGuess = [];
   colorTarget = [];
@@ -101,33 +136,47 @@ function resetGame() {
 
 }
 
+function endGame() {
+  resetTimer();
+  displayWhite();
+}
+
 function randomColorSet() {
-  const shuffledColors = colors.sort((color) => (Math.random() > 0.5 ? 1 : -1));
-  return shuffledColors.splice(0,3);
+  
+  let shuffledColors = colors.sort((color) => (Math.random() > 0.5 ? 1 : -1));
+  return shuffledColors.slice(0, 3);
 }
 
 function toSeconds(totalMilliSeconds) {
-  seconds = (totalMilliSeconds - totalMilliSeconds % 1000) / 1000;
-  milliseconds = totalMilliSeconds % 1000;
+  let seconds = (totalMilliSeconds - totalMilliSeconds % 1000) / 1000;
+  let milliseconds = totalMilliSeconds % 1000;
   return `${seconds.toString().padStart(2,"0")}:${milliseconds.toString().slice(0,2).padStart(2,"0")}`
 }
 
 function startTimer(milliseconds, callback) {
+  
   const startTime = new Date();
   
   interval = setInterval(function () {
+    
     let currentTime = new Date();  
     let timeElapsed = currentTime - startTime;
     let timeRemaining = milliseconds - timeElapsed;
+
+    console.log({interval, timeRemaining})
+    
     if (timeRemaining >= 0) timer.textContent = toSeconds(timeRemaining);
     else timer.textContent = "00:00"
 
   },100)
 
   timeout = setTimeout(() => {
-      callback();
-      clearInterval(interval);
-    },milliseconds)
+    console.log({timeout, ended:'ended'})
+    callback();
+    clearInterval(interval);  
+  }, milliseconds)
+  
+  console.log({timeout, started: 'started'})
 }
 
 function resetTimer() {
@@ -151,11 +200,12 @@ function monitorPalletteInput() {
   
 }
 
-function monitorNewGameButton() {
-  button.addEventListener("click", resetGame);
+function monitorButtons() {
+  newButton.addEventListener("click", resetGame);
   window.addEventListener("keyup",  event => {
     if (event.code === 'Enter') resetGame();
   })
+  resetButton.addEventListener('click', endGame)
 
 }
 
@@ -176,8 +226,8 @@ function same(colorSet1, colorSet2) {
   renderPallette();
   renderDisplay();
   monitorPalletteInput();
-  monitorNewGameButton();
-  modal.showModal();
+  monitorButtons();
+  
 
 })();
 

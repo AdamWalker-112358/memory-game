@@ -15,7 +15,10 @@
         <img class="logo__icon" src="./src/media/icon.png" alt="Icon" >
         <img class="logo__text" src="./src/media/logo.svg" alt="Logo" >
       </div>
-      <button class="header__button"> New Game </button>
+      <div class="header__buttons">
+        <button class="buttons__new"> New Game </button>
+        <button class="buttons__reset">Reset Game</button>
+      </div>
     </header>
 
     <main class="main">
@@ -26,7 +29,16 @@
         <div class="game__pallette"></div>
       </div>
     </main>
-
+    <dialog class="modal" > 
+      <div class="modal__content">
+        <h1 class="modal__title"> Winner </h1>
+        <p class="modal__body"> </p>
+        <div class="modal__buttons">
+          <button class="modal__button-close">Close</button>
+          <button class="modal__button-new">New Game</button>
+        </div>
+      </div> 
+    </dialog>
     <footer></footer>
   </body>
 </html>
